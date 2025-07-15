@@ -12,6 +12,7 @@ An intelligent agent implementation for navigating the classic Wumpus World envi
 - [Features](#features)
 - [Visualization](#visualization)
 - [How To Run](#how-to-run)
+- [Future Enhancements](#future-enhancements)
 
 ---
 
@@ -114,9 +115,8 @@ A fully interactive Tkinter GUI to inspect each step in the simulation.
 ---
 
 ## How to Run
-
 ### 1. Install Requirements
-
+- Python 3.8+
 ```bash
 pip install pillow
 pip install tkinter
@@ -131,3 +131,10 @@ pip install z3-solver
 
 ### 4. Run `visualize.py`
 - Run `visualize.py` file and choose the json output file in `output/`.
+
+## Future Enhancements
+- Dynamic grid size.
+- Random world generator.
+- Reduce score for each move like `Turn`, `Move`, `Shoot`, etc
+- **Advanced Pathfinding**: Once the gold is found or all safe squares are explored, use a more sophisticated pathfinding algorithm like A* to find the most efficient path back to the start, rather than just relying on the existing heuristic.
+- **Heuristic Directional Bias**: Enhance cell ranking by including the current facing direction in the heuristic. Prioritize moves that do not require turning to reduce overall action cost and improve fluidity
