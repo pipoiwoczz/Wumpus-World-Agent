@@ -1,20 +1,54 @@
-# Wumpus World AI Agent 🧠🏹
+# Wumpus World Agent
 
-A Python-based intelligent agent for navigating a dangerous 10x10 Wumpus World, built with symbolic reasoning (Z3), tactical exploration, and visual replay. Inspired by classic AI techniques (logical inference, knowledge-based systems, and planning).
+An intelligent agent implementation for navigating the classic Wumpus World environment.
 
-## 📂 Project Structure
+## Table of Contents
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [World Format](#world-format)
+- [Percepts](#percepts)
+- [Agent Rules](#agent-rules)
+- [Features](#features)
+- [Visualization](#visualization)
+- [Installation & Usage](#installation--usage)
+
+---
+
+## Overview
+This project simulates an **AI agent** in a dangerous grid-like environment, inspired by the classic Wumpus World problem.
+
+The agent must:
+- Use percepts like `BREEZE`, `STENCH`, `GLOW` to reason about hidden hazards.
+- Grab the **gold** and return safely.
+- Avoid **pits**, **Wumpus**, and **poison gas**, using healing potions when needed.
+
+## Project Structure
 
 ├── agent.py # Main Agent logic (percepts, planning, logging)
 ├── kb.py # KnowledgeBase using symbolic Z3 logic
 ├── const.py # Enum definitions for World objects, actions, etc.
-├── test.py # Simulation runner with optional Pygame rendering
+├── test.py # Launch the simulation with a chosen map
 ├── visualize.py # Tkinter-based visualizer from generated logs
-├── testcaseX.txt # Sample test boards
-├── agent_log.jsonl # Step-by-step agent logs for visualization
+├── input/  # Test case world maps
+├── output/  # Auto-generated agent_log.jsonl files
 └── README.md # You're reading it!
 
+## World Information
+### World Format (`input/testcase.txt`)
+Each map is stored in `input` folder
 
-## 🌍 World Format (`input/test1.txt`)
+### Example input file
+10
+-.-.-.-.-.-.-.-.-.-
+-.P.-.-.P.-.-.-.-.-
+-.-.-.-.-.-.P.-.-.-
+-.-.P.-.-.-.-.-.-.-
+-.-.-.-.-.-.-.-.-.-
+-.-.-.-.-.-.P.-.-.-
+G.-.-.H_P.-.-.-.-.-
+W.-.-.-.-.-.W.-.-.-
+-.W.-.-.P_G.-.-.-.-
+A.-.W.-.-.-.-.-.-.-
 
 Each world is described in a simple grid format. The first line is always the board size (`10` for 10×10). Each cell is separated by `.` and may contain multiple symbols:
 
@@ -28,21 +62,35 @@ Each world is described in a simple grid format. The first line is always the bo
 | `P_G`   | Poison Gas         |
 | `-`     | Empty cell         |
 
----
+### Percepts
 
-## 🧠 Agent Features
+| Percept  | Triggered By         |
+|----------|----------------------|
+| `BREEZE` | Adjacent to a Pit    |
+| `STENCH` | Adjacent to Wumpus   |
+| `WHIFF`  | Adjacent to Poison Gas |
+| `GLOW`   | Adjacent to Potion   |
 
-- ✅ **Heuristic Scoring + Logic Reasoning**
-- ✅ Avoids dangerous locations with incomplete knowledge
-- ✅ Infers from **breeze**, **stench**, and **gas smell**
-- ✅ Collects **GOLD** and **POTIONS**
-- ✅ Uses **arrows to shoot** Wumpus if necessary
-- ✅ Uses **potion** to heal when HP is low
-- ✅ Logs **every decision**, perception, and action
+## Features
+- Agent with decision-making capabilities
+- Wumpus World environment simulation
+- Perception system (stench, breeze, glow, whiff)
+- Knowledge representation and reasoning
 
----
+## Agent Rules
+- Starts at `(9, 0)` with:
+  - 4 HP
+  - 1 Arrow
+  - Score = 0
+- Uses:
+  - Symbolic reasoning with Z3 to infer safe/unsafe cells
+  - Heuristic-based ranking to choose next moves
+- Can:
+  - **Shoot** Wumpus if position is inferred and facing direction is correct
+  - **Use potion** if HP is low
+  - **Return to start** and `CLIMB` out when no safe moves remain
 
-## 📊 Visualization Features (`visualize.py`)
+## Visualization Features (`visualize.py`)
 
 A fully interactive Tkinter GUI to inspect each step in the simulation.
 
@@ -54,14 +102,24 @@ A fully interactive Tkinter GUI to inspect each step in the simulation.
 | 🖱️ Scrollable sidebar        | All agent status, legend, controls
 | 🧭 Directional symbols        | Shows which way agent is facing
 | ⚠️ Alerts and event log      | Shows important events like gold collected, gas damage, death
-| 🖼 Export as image or .gif     | For reporting or demo
 
 ---
 
-## ✅ How to Run
+## How to Run
 
 ### 1. Install Requirements
 
 ```bash
 pip install pillow
+pip install tkinter
+pip install z3-solver
+```
 
+### 2. Create test case
+- Create test case in folder `input/`.
+
+### 3. Run `test.py`
+- In `test.py`, change testcase name and run this file.
+
+### 4. Run `visualize.py`
+- Run `visualize.py` file and choose the json output file in `output/`.
