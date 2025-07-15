@@ -3,16 +3,21 @@
 An intelligent agent implementation for navigating the classic Wumpus World environment.
 
 ## Table of Contents
+- [Demo](#demo)
 - [Overview](#overview)
 - [Project Structure](#project-structure)
-- [World Format](#world-format)
+- [World Information](#world-information)
 - [Percepts](#percepts)
 - [Agent Rules](#agent-rules)
 - [Features](#features)
 - [Visualization](#visualization)
-- [Installation & Usage](#installation--usage)
+- [How To Run](#how-to-run)
 
 ---
+
+## Demo
+![Screenshot1](demo/testcase5.png)
+![Screenshot2](demo/testcase7.png)
 
 ## Overview
 This project simulates an **AI agent** in a dangerous grid-like environment, inspired by the classic Wumpus World problem.
@@ -39,6 +44,7 @@ The agent must:
 Each map is stored in `input` folder
 
 ### Example input file
+```text
 10
 -.-.-.-.-.-.-.-.-.-
 -.P.-.-.P.-.-.-.-.-
@@ -50,6 +56,7 @@ G.-.-.H_P.-.-.-.-.-
 W.-.-.-.-.-.W.-.-.-
 -.W.-.-.P_G.-.-.-.-
 A.-.W.-.-.-.-.-.-.-
+```
 
 Each world is described in a simple grid format. The first line is always the board size (`10` for 10×10). Each cell is separated by `.` and may contain multiple symbols:
 
@@ -91,7 +98,7 @@ Each world is described in a simple grid format. The first line is always the bo
   - **Use potion** if HP is low
   - **Return to start** and `CLIMB` out when no safe moves remain
 
-## Visualization Features (`visualize.py`)
+## Visualization
 
 A fully interactive Tkinter GUI to inspect each step in the simulation.
 
