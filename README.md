@@ -23,7 +23,7 @@ The agent must:
 - Avoid **pits**, **Wumpus**, and **poison gas**, using healing potions when needed.
 
 ## Project Structure
-
+``` text
 ├── agent.py # Main Agent logic (percepts, planning, logging)
 ├── kb.py # KnowledgeBase using symbolic Z3 logic
 ├── const.py # Enum definitions for World objects, actions, etc.
@@ -32,6 +32,7 @@ The agent must:
 ├── input/  # Test case world maps
 ├── output/  # Auto-generated agent_log.jsonl files
 └── README.md # You're reading it!
+```
 
 ## World Information
 ### World Format (`input/testcase.txt`)
