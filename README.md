@@ -1,5 +1,7 @@
 # Wumpus World Agent
 
+[![Watch the Demo](demo/testcase5.png)](https://youtu.be/YrUwpJ9wo2I)
+
 An intelligent agent implementation for navigating the classic Wumpus World environment.
 
 ## Table of Contents
